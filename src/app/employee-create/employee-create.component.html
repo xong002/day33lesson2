@@ -1,0 +1,70 @@
+<p>employee-create works!</p>
+<div class="container-fluid">
+  <form [formGroup]="form" (ngSubmit)="processForm(form)">
+    <!-- Bootstrap method -->
+    <!-- <div class="mb-3"> -->
+    <!-- <label for="name">Name:</label><br />
+      <input type="text" name="name" /> -->
+    <!-- </div> -->
+
+    <!-- Angular Material method -->
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" #fullName />
+      <mat-hint>Please enter your full name</mat-hint>
+      <mat-error *ngIf="form.controls['name'].errors?.['required']">Name is a required field</mat-error>
+      <!-- min length error not working -->
+      <mat-error *ngIf="form.controls['name'].errors?.['minlength']">Minimum 20 characters required for name field</mat-error>
+    </mat-form-field>
+    <br /><br />
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" #email />
+      <!-- from google icons -->
+      <mat-icon matSuffix>mail_outline</mat-icon>
+      <mat-hint>Please enter your organisation email address</mat-hint>
+      <mat-error>Email is a required field</mat-error>
+      <mat-error>Invalid email format</mat-error>
+    </mat-form-field>
+    <br /><br />
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <textarea matInput formControlName="address" #address rows="2"></textarea>
+      <mat-icon matSuffix>contact_mail</mat-icon>
+      <mat-hint>Please enter your address</mat-hint>
+    </mat-form-field>
+    <br /><br />
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <mat-select matNativeControl formControlName="country" #country>
+        <mat-option value="singapore">SG</mat-option>
+        <mat-option value="malaysia">MY</mat-option>
+        <mat-option value="india">ID</mat-option>
+        <mat-option value="china">CN</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br /><br />
+    <mat-label>Gender: </mat-label>
+    <mat-radio-group formControlName="gender">
+      <mat-radio-button value="male">Male</mat-radio-button>
+      <mat-radio-button value="female">Female</mat-radio-button>
+    </mat-radio-group>
+    <br /><br />
+    <mat-form-field>
+      <mat-label>Date of Birth:</mat-label>
+      <input matInput [matDatepicker]="datepicker" formControlName="birthdate"/>
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Apply
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+</div>
